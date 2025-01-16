@@ -1,9 +1,9 @@
-const stack = []
+const routes = []
 
 export const router = new Proxy({}, {
   get: (_, method) => (path, handler) => {
 	method = ['any', 'use'].includes(method) ? '*' : method.toUpperCase()
-	stack.unshift({
+	routes.unshift({
       path, 
       method, 
       handler,
@@ -27,9 +27,9 @@ export function route(req, res) {
       return
 	}
 
-    const route = stack[idx]
+    const route = routes[idx]
 
-    const next = () => handle(--idx)
+    const next = () => handle(idx - 1)
 
     const matches = valid.has(route.method) && valid.has(route.path)
 
@@ -38,5 +38,5 @@ export function route(req, res) {
       : next()
   }
 
-  handle(stack.length - 1)
+  handle(routes.length - 1)
 }
