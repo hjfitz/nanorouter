@@ -5,9 +5,7 @@
   <summary>Table of Contents</summary>
   <ul>
     <li><a href="#purpose">Purpose</a></li>
-    <li><a href="#architecture-overview">Architecture Overview</a></li>
     <li><a href="#getting-started">Getting Started</a></li>
-    <li><a href="#configuration">Configuration</a></li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#exports-documentation">Exports Documentation</a></li>
   </ul>
