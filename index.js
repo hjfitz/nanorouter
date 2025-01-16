@@ -1,11 +1,14 @@
-const stack = [];
+const stack = []
 
 export const router = new Proxy({}, {
-  get: (_, method) => (path, handler) => stack.push({
-    path, 
-    method: method === 'any' ? '*' : method.toUpperCase(), 
-    handler,
-  })
+  get: (_, method) => (path, handler) => {
+	method = ['any', 'use'].includes(method) ? '*' : method.toUpperCase()
+	stack.unshift({
+      path, 
+      method, 
+      handler,
+    })
+  }
 })
 
 /**
@@ -19,8 +22,10 @@ export function route(req, res) {
    * @param {number} index
    */
   const handle = (idx) => {
-    if (idx < 0)
+    if (idx < 0) {
+	  res.writeHead(404).end('')
       return
+	}
 
     const route = stack[idx]
 
@@ -31,7 +36,6 @@ export function route(req, res) {
     matches 
       ? route.handler(req, res, next)
       : next()
-
   }
 
   handle(stack.length - 1)
