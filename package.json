@@ -7,5 +7,7 @@
   "author": "harry fitzgerald <harry@hjf.io>",
   "license": "GPL-2",
   "description": "",
-  "dependencies": {}
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4"
+  }
 }
